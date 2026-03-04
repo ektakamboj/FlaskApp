@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!-- Search Form -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-3">Search Weather by City</h5>
+                <form method="POST" action="/">
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               name="city"
+                               placeholder="Enter city name (e.g. London)"
+                               aria-label="City name"
+                               value="{{ request.form.get('city', '') }}"
+                               autofocus>
+                        <button class="btn btn-primary" type="submit">
+                            Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Error Alert -->
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <!-- Weather Result Card -->
+        {% if weather %}
+        <div class="card shadow weather-card">
+            <div class="card-body text-center">
+                <h4 class="card-title">{{ weather.city }}, {{ weather.country }}</h4>
+
+                <img src="{{ weather.icon_url }}"
+                     alt="{{ weather.description }}"
+                     class="weather-icon">
+
+                <h1 class="display-4 fw-bold">{{ weather.temperature }}&deg;C</h1>
+                <p class="text-muted mb-1">Feels like {{ weather.feels_like }}&deg;C</p>
+                <p class="lead text-capitalize">{{ weather.description }}</p>
+
+                <hr>
+
+                <div class="row text-center">
+                    <div class="col-6">
+                        <p class="mb-0 text-muted">Humidity</p>
+                        <p class="fw-bold fs-5">{{ weather.humidity }}%</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="mb-0 text-muted">Wind Speed</p>
+                        <p class="fw-bold fs-5">{{ weather.wind_speed }} m/s</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
