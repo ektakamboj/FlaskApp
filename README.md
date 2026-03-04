@@ -161,3 +161,5 @@ All should return valid weather results.
 - **python-dotenv** — Environment variable management
 - **Bootstrap 5** — Responsive UI styling
 - **OpenWeatherMap API** — Weather data and icons
+
+Flask App to fetch Weather from https://home.openweathermap.org/ for any City
